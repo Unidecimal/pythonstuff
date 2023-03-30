@@ -16,32 +16,54 @@ def the_old_code():
 
     # Beräkna sannolikheten med hjälp av binomialfördelningen
     prob = sum(
-        [math.comb(n, i) * (successes_sides/dice_tot_sides)**i * (1-(successes_sides/dice_tot_sides))**(n-i)
-        for i in range(k, n+1)]
-        )
+        [
+            math.comb(n, i)
+            * (successes_sides / dice_tot_sides) ** i
+            * (1 - (successes_sides / dice_tot_sides)) ** (n - i)
+            for i in range(k, n + 1)
+        ]
+    )
 
-    print(f"Sannolikhet att slå över {dice_tot_sides - successes_sides} på minst {k} av {n} tärningar: {prob:.2%}")
+    print(
+        f"Sannolikhet att slå över {dice_tot_sides - successes_sides} på minst {k} av {n} tärningar: {prob:.2%}"
+    )
 
-def succsess_percentage_for_dice_roll(dice_n: int, success_dice_n: int, dice_tot_sides: int, successes_sides: int) -> int:
 
+class Dice:
+    def __init__(self, total_sides, success_sides):
+        self.total_sides = total_sides
+        self.success_sides = success_sides
+
+
+def succsess_percentage_for_dice_roll(
+    dice_n: int, success_dice_n: int, dice_tot_sides: int, successes_sides: int
+) -> int:
     # Number of dices
-    #dice_n = 1
+    # dice_n = 1
 
     # Number of succsesses needed
-    #success_dice_n = 1
+    # success_dice_n = 1
 
     # Total number of sides on the dice
-    #dice_tot_sides = 6
+    # dice_tot_sides = 6
 
     # The number of sides that result in succsess
-    #successes_sides = 1
+    # successes_sides = 1
 
     # Calculate the probability using the binomial distribution
     prob = sum(
-        [math.comb(dice_n, i) * (successes_sides/dice_tot_sides)**i * (1-(successes_sides/dice_tot_sides))**(dice_n-i)
-        for i in range(success_dice_n, dice_n+1)]
-        )
+        [
+            math.comb(dice_n, i)
+            * (successes_sides / dice_tot_sides) ** i
+            * (1 - (successes_sides / dice_tot_sides)) ** (dice_n - i)
+            for i in range(success_dice_n, dice_n + 1)
+        ]
+    )
 
     return round(prob * 100, 2)
-class Dice:
+
+
+def calculate_chans_table_with_multiple_dice(
+    max_dice_hand: int, dice_to_success: int, dice: Dice
+):
     pass
